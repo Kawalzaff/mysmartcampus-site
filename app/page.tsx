@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [schoolName, setSchoolName] = useState("");
 const [contactPerson, setContactPerson] = useState("");
 const [mobile, setMobile] = useState("");
@@ -17,46 +18,104 @@ const handleSubmit = () => {
  return (
   <main className="bg-gradient-to-b from-white to-blue-50 text-gray-900">
     
-    {/* Navbar */}
-    <nav className="flex justify-between items-center px-4 md:px-12 py-2 bg-gradient-to-r from-[#F8FAFC] to-[#DBEAFE] shadow-md sticky top-0 z-50">
+   {/* Navbar */}
+<nav className="sticky top-0 z-50 bg-gradient-to-r from-[#F8FAFC] to-[#DBEAFE] shadow-md">
+
+  <div className="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-10 py-3">
+
+    {/* Logo */}
+    <a href="#home">
       <Image
         src="/logo1.png"
         alt="MySmartCampus Logo"
-        width={160}
+        width={170}
         height={70}
-        style={{ height: "auto" }}
+        className="w-36 md:w-44 h-auto"
       />
-
-      <ul className="flex items-center gap-2 md:gap-4 text-sm md:text-base font-medium">
-  <li>
-    <a href="#home" className="cursor-pointer hover:text-blue-600 transition">
-      Home
     </a>
-  </li>
 
-  <li>
-    <a href="#features" className="cursor-pointer hover:text-blue-600 transition">
-      Features
-    </a>
-  </li>
+    {/* Desktop Menu */}
+    <ul className="hidden md:flex items-center gap-8 font-medium text-gray-700">
 
-  <li>
-    <a href="#modules" className="cursor-pointer hover:text-blue-600 transition">
-      Modules
-    </a>
-  </li>
+      <li>
+        <a href="#home" className="hover:text-blue-600 transition">
+          Home
+        </a>
+      </li>
 
-  <li>
-    <a
-      href="#contact"
-      className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow-md transition"
+      <li>
+        <a href="#features" className="hover:text-blue-600 transition">
+          Features
+        </a>
+      </li>
+
+      <li>
+        <a href="#modules" className="hover:text-blue-600 transition">
+          Modules
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="#contact"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl shadow-lg transition"
+        >
+          Contact
+        </a>
+      </li>
+
+    </ul>
+
+    {/* Mobile Button */}
+    <button
+      className="md:hidden text-3xl"
+      onClick={() => setMenuOpen(!menuOpen)}
     >
-      Contact
-    </a>
-  </li>
-</ul>
-    </nav>
+      ☰
+    </button>
 
+  </div>
+
+  {/* Mobile Menu */}
+  {menuOpen && (
+    <div className="md:hidden bg-white shadow-lg border-t">
+
+      <a
+        href="#home"
+        className="block px-6 py-4 border-b hover:bg-blue-50"
+        onClick={() => setMenuOpen(false)}
+      >
+        Home
+      </a>
+
+      <a
+        href="#features"
+        className="block px-6 py-4 border-b hover:bg-blue-50"
+        onClick={() => setMenuOpen(false)}
+      >
+        Features
+      </a>
+
+      <a
+        href="#modules"
+        className="block px-6 py-4 border-b hover:bg-blue-50"
+        onClick={() => setMenuOpen(false)}
+      >
+        Modules
+      </a>
+
+      <a
+        href="#contact"
+        className="block px-6 py-4 bg-blue-600 text-white text-center font-semibold"
+        onClick={() => setMenuOpen(false)}
+      >
+        Contact
+      </a>
+
+    </div>
+  )}
+
+</nav>
     {/* Hero Section */}
       <section id="home" className="pt-28 pb-20 px-8 ... bg-gradient-to-r from-[#0F172A] via-[#1D4ED8] to-[#06B6D4] text-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -96,7 +155,7 @@ const handleSubmit = () => {
   {/* Features Section */}
 <section id="features" className="py-24 px-8 bg-gradient-to-b from-white to-blue-50">
   <h2 className="text-5xl font-bold text-center mb-4 text-slate-900">
-    Our Core Features
+    School ERP Features
   </h2>
 
   <p className="text-center text-gray-600 text-lg mb-14 max-w-3xl mx-auto">
