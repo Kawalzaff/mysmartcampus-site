@@ -1,5 +1,5 @@
 "use client";
-
+import emailjs from "@emailjs/browser";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -7,13 +7,39 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [schoolName, setSchoolName] = useState("");
 const [contactPerson, setContactPerson] = useState("");
+const [email, setEmail] = useState("");
 const [mobile, setMobile] = useState("");
 const [city, setCity] = useState("");
 
-const handleSubmit = () => {
-  const message = `New Demo Request:%0A%0ASchool Name: ${schoolName}%0AContact Person: ${contactPerson}%0AMobile: ${mobile}%0ACity: ${city}`;
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
 
-  window.open(`https://wa.me/917009960636?text=${message}`, "_blank");
+  emailjs
+    .send(
+      "service_w6bda5h",
+      "template_2ww9mo9",
+      {
+        school_name: schoolName,
+        contact_person: contactPerson,
+        email: email,
+        mobile: mobile,
+        city: city,
+      },
+      "ntKYAWUp-m_2lt09M"
+    )
+    .then(() => {
+      alert("✅ Demo Request Submitted Successfully!");
+
+      setSchoolName("");
+      setContactPerson("");
+      setEmail("");
+      setMobile("");
+      setCity("");
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("❌ Something went wrong.");
+    });
 };
  return (
   <main className="bg-gradient-to-b from-white to-blue-50 text-gray-900">
@@ -282,26 +308,83 @@ const handleSubmit = () => {
         </div>
       </section>
 
-      {/* Demo Form */}
-<section id="demo" className="py-20 px-8 bg-gradient-to-r from-[#0F172A] to-[#1E293B] text-white">
-        <h2 className="text-4xl font-bold text-center mb-12">
-          Book Free Demo
-        </h2>
+     {/* Demo Form */}
+<section
+  id="demo"
+  className="py-24 px-6 bg-gradient-to-b from-[#EFF6FF] via-[#F8FAFC] to-white"
+>
+  <div className="max-w-4xl mx-auto text-center mb-12">
+    <h2 className="text-5xl font-bold text-slate-900">
+      Book Your Free Demo
+    </h2>
 
-        <div className="max-w-3xl mx-auto bg-white text-black rounded-xl p-8 shadow-xl">
-          <div className="grid md:grid-cols-2 gap-6">
-            <input type="text" placeholder="School Name" className="border p-3 rounded-lg" />
-            <input type="text" placeholder="Contact Person" className="border p-3 rounded-lg" />
-            <input type="text" placeholder="Mobile Number" className="border p-3 rounded-lg" />
-            <input type="text" placeholder="City" className="border p-3 rounded-lg" />
-          </div>
+    <p className="text-lg text-slate-600 mt-4">
+      Experience the smartest School ERP for admissions, fees, attendance,
+      transport and complete school management.
+    </p>
+  </div>
 
-          <button className="bg-blue-500 text-white px-8 py-3 rounded-lg mt-6 w-full">
-            Submit
-          </button>
-        </div>
-      </section>
+  <form
+    onSubmit={handleSubmit}
+    className="max-w-3xl mx-auto bg-white/90 backdrop-blur-lg border border-blue-100 rounded-3xl shadow-2xl p-8 md:p-10"
+  >
+    <div className="grid md:grid-cols-2 gap-6">
 
+      <input
+        type="text"
+        placeholder="🏫 School Name"
+        value={schoolName}
+        onChange={(e) => setSchoolName(e.target.value)}
+        required
+        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition"
+      />
+
+      <input
+        type="text"
+        placeholder="👤 Contact Person"
+        value={contactPerson}
+        onChange={(e) => setContactPerson(e.target.value)}
+        required
+        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition"
+      />
+
+      <input
+        type="email"
+        placeholder="📧 Email Address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition"
+      />
+
+      <input
+        type="text"
+        placeholder="📱 Mobile Number"
+        value={mobile}
+        onChange={(e) => setMobile(e.target.value)}
+        required
+        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition"
+      />
+
+      <input
+        type="text"
+        placeholder="📍 City"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        required
+        className="md:col-span-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition"
+      />
+
+    </div>
+
+    <button
+      type="submit"
+      className="mt-8 w-full rounded-xl bg-gradient-to-r from-blue-700 to-sky-500 py-4 text-lg font-semibold text-white shadow-xl transition duration-300 hover:scale-[1.02] hover:shadow-2xl"
+    >
+      🚀 Book Free Demo
+    </button>
+  </form>
+</section>
       {/* Dashboard */}
       <section className="py-20 px-8 text-center bg-slate-100">
         <h2 className="text-4xl font-bold mb-6 text-blue-700">
