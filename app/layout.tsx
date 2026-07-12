@@ -78,6 +78,35 @@ export const metadata: Metadata = {
     apple: "/favicon.ico",
   },
 };
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "MySmartCampus",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: "https://mysmartcampus.in",
+  image: "https://mysmartcampus.in/logo1.png",
+  description:
+    "MySmartCampus is a complete School ERP Software for Admissions, Fee Management, Attendance, Exams, Transport, Payroll, Library and Parent Mobile App.",
+  brand: {
+    "@type": "Brand",
+    name: "MySmartCampus",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "MySmartCampus",
+    url: "https://mysmartcampus.in",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://mysmartcampus.in/logo1.png",
+    },
+  },
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "INR",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -89,10 +118,11 @@ export default function RootLayout({
       <body>
         {children}
 
+           {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-L10L7ZC7LE"
           strategy="afterInteractive"
-/>
+        />
 
         <Script id="google-analytics" strategy="afterInteractive">
           {`
@@ -103,18 +133,30 @@ export default function RootLayout({
             gtag('config', 'G-L10L7ZC7LE');
           `}
         </Script>
-         <Script id="microsoft-clarity" strategy="afterInteractive">
-    {`
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);
-        t.async=1;
-        t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "xk5m7gohez");
-    `}
-  </Script>
+
+        {/* Microsoft Clarity */}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);
+              t.async=1;
+              t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];
+              y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "xk5m7gohez");
+          `}
+        </Script>
+
+        {/* Schema.org Structured Data */}
+        <Script
+          id="schema-org"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
+        />
       </body>
     </html>
   );
