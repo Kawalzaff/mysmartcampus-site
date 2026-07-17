@@ -874,7 +874,7 @@ Professional onboarding and technical support.
 
           <div>
             <p className="text-white font-semibold mb-1">Email</p>
-            <p>info@mysmartcampus.in</p>
+            <p>info@mooltechsolutions.com</p>
           </div>
 
           <div>
@@ -894,8 +894,20 @@ Professional onboarding and technical support.
       </p>
 
       <p className="mt-3 text-sm text-slate-500">
-        © 2026 MySmartCampus. All Rights Reserved.
-      </p>
+  © 2026 MySmartCampus. All Rights Reserved.
+</p>
+
+<p className="mt-2 text-sm text-slate-400">
+  Powered by{" "}
+  <a
+    href="https://mooltechsolutions.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="font-semibold text-blue-400 hover:text-blue-300"
+  >
+    Mool Tech Solutions
+  </a>
+</p>
 
     </div>
 
